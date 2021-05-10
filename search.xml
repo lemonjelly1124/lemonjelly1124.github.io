@@ -8,22 +8,15 @@
       <link href="2021/05/11/tupian/"/>
       <url>2021/05/11/tupian/</url>
       
-        <content type="html"><![CDATA[<p><img src="/1.jpg" alt="烤鸡"></p><img src="/2021/05/11/tupian/1.jpg" width="200" height="300">]]></content>
+        <content type="html"><![CDATA[<p><img src="/2021/05/11/tupian/1.jpg" alt="烤鸡"></p><img src="/2021/05/11/tupian/1.jpg" width="200" height="300">]]></content>
       
       
       
-    </entry>
-    
-    
-    
-    <entry>
-      <title>图片测试</title>
-      <link href="2021/05/11/tu-pian-ce-shi/"/>
-      <url>2021/05/11/tu-pian-ce-shi/</url>
-      
-        <content type="html"><![CDATA[<img src="/2021/05/11/tu-pian-ce-shi/1.jpg" width="200" height="300">]]></content>
-      
-      
+        <tags>
+            
+            <tag> 测试 </tag>
+            
+        </tags>
       
     </entry>
     
@@ -46,9 +39,9 @@
       
         <tags>
             
-            <tag> 标签测试 </tag>
+            <tag> 测试 </tag>
             
-            <tag> 标签测试2 </tag>
+            <tag> 标签测试 </tag>
             
         </tags>
       
