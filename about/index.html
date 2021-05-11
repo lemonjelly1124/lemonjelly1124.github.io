@@ -311,7 +311,7 @@
 
     <script>
         //切换时间间隔
-        var timeInterval = 1000 * 5;
+        var timeInterval = 1000 * 10;
         //banner文件夹中图片数
         var imgNum = 7;
         //当前图片编号
@@ -334,7 +334,6 @@
             img.src = bannerUrl;
 
             img.onload = function() {
-
                 $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
             }
 
