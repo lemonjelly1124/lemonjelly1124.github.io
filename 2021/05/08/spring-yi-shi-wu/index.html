@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="五一之行, LemonJelly&#39;Blog">
+    <meta name="keywords" content="Spring(一)————事务, LemonJelly&#39;Blog">
     <meta name="description" content="软件工程大三学生">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>五一之行 | LemonJelly&#39;Blog</title>
+    <title>Spring(一)————事务 | LemonJelly&#39;Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -268,12 +268,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/%E5%8D%97%E4%BA%AC%E4%B9%8B%E8%A1%8C.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">五一之行</h1>
+                    <h1 class="description center-align post-title">Spring(一)————事务</h1>
                 </div>
             </div>
         </div>
@@ -389,12 +389,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E7%94%9F%E6%B4%BB/">
-                                <span class="chip bg-color">生活</span>
+                            <a href="/tags/%E5%AD%A6%E4%B9%A0/">
+                                <span class="chip bg-color">学习</span>
                             </a>
                         
-                            <a href="/tags/%E6%97%85%E8%A1%8C/">
-                                <span class="chip bg-color">旅行</span>
+                            <a href="/tags/spring/">
+                                <span class="chip bg-color">spring</span>
                             </a>
                         
                     </div>
@@ -405,8 +405,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="post-category">
-                                生活
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                学习
                             </a>
                         
                     </div>
@@ -418,7 +418,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-05-12
+                    2021-05-08
                 </div>
                 
 
@@ -427,14 +427,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.2k
+                    2.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    8 分
                 </div>
                 
 
@@ -457,184 +457,140 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="五一之行"><a href="#五一之行" class="headerlink" title="五一之行"></a>五一之行</h1><h2 id="出行计划"><a href="#出行计划" class="headerlink" title="出行计划"></a>出行计划</h2><table>
-<thead>
-<tr>
-<th align="left">时间</th>
-<th align="left">上午</th>
-<th>下午</th>
-<th>晚上</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">五月一号</td>
-<td align="left">上海野生动物园</td>
-<td></td>
-<td>到达南京</td>
-</tr>
-<tr>
-<td align="left">五月二号</td>
-<td align="left">玄武湖公园</td>
-<td>钟山风景区</td>
-<td>随便逛逛</td>
-</tr>
-<tr>
-<td align="left">五月三号</td>
-<td align="left">侵华日军大屠杀纪念馆</td>
-<td>夫子庙</td>
-<td>老东门</td>
-</tr>
-<tr>
-<td align="left">五月四号</td>
-<td align="left">返回上海</td>
-<td>南京东路</td>
-<td>时代外滩</td>
-</tr>
-<tr>
-<td align="left">五月五号</td>
-<td align="left">睡觉</td>
-<td>前往机场</td>
-<td></td>
-</tr>
-</tbody></table>
-<h2 id="五月一号"><a href="#五月一号" class="headerlink" title="五月一号"></a>五月一号</h2><p>一早出发前往野生动物园，寄存好行李后进入动物园，入口右侧的鸽子区~~咕咕咕咕</p>
-<img src="/2021/05/12/wu-yi-zhi-xing/34.jpg" width="70%" height="70%">
+                <h2 id="Spring事务传播机制"><a href="#Spring事务传播机制" class="headerlink" title="Spring事务传播机制"></a>Spring事务传播机制</h2><h3 id="什么是事务？"><a href="#什么是事务？" class="headerlink" title="什么是事务？"></a>什么是事务？</h3><p>​        事务是数据库操作最基本单元，逻辑上一组操作，要么都成功，如果有一个失败所有操 作都失败</p>
+<h4 id="典型场景：银行转账"><a href="#典型场景：银行转账" class="headerlink" title="典型场景：银行转账"></a>典型场景：<strong>银行转账</strong></h4><p>lucy 转账 100 元 给 mary </p>
+<p>lucy 少 100，mary 多 100。</p>
+<h5 id="1-创建数据库，添加记录"><a href="#1-创建数据库，添加记录" class="headerlink" title="1.创建数据库，添加记录"></a>1.创建数据库，添加记录</h5><img src="/2021/05/08/spring-yi-shi-wu/数据库1.png" width="70%" height="70%">
 
-<p>长嘴巴的食蚁兽<span class="github-emoji"><span>😄</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😄</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😄</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>
-<img src="/2021/05/12/wu-yi-zhi-xing/35.jpg" width="70%" height="70%">
+<h5 id="2、创建-service，搭建-dao，完成对象创建和注入关系"><a href="#2、创建-service，搭建-dao，完成对象创建和注入关系" class="headerlink" title="2、创建 service，搭建 dao，完成对象创建和注入关系"></a>2、创建 service，搭建 dao，完成对象创建和注入关系</h5><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//service 注入 dao，在 dao 注入 JdbcTemplate，在 JdbcTemplate 注入 DataSource</span>
+<span class="token annotation punctuation">@Service</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UserService</span> <span class="token punctuation">{</span>
+ <span class="token comment">//注入 dao</span>
+ <span class="token annotation punctuation">@Autowired</span>
+ <span class="token keyword">private</span> <span class="token class-name">UserDao</span> userDao<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token annotation punctuation">@Repository</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UserDaoImpl</span> <span class="token keyword">implements</span> <span class="token class-name">UserDao</span> <span class="token punctuation">{</span>
+ <span class="token annotation punctuation">@Autowired</span> <span class="token keyword">private</span> <span class="token class-name">JdbcTemplate</span> jdbcTemplate<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>随处可见的天鹅</p>
-<img src="/2021/05/12/wu-yi-zhi-xing/36.jpg" width="70%" height="70%">
-
-<p>睡午觉的狐猴一家</p>
-<img src="/2021/05/12/wu-yi-zhi-xing/37.jpg" width="70%" height="70%">
-
-<p> 看起来不是很聪明的鹦鹉</p>
-<img src="/2021/05/12/wu-yi-zhi-xing/38.jpg" width="70%" height="70%">
-
-<p>大熊猫稀少的原因<span class="github-emoji"><span>😂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>
-<img src="/2021/05/12/wu-yi-zhi-xing/40.jpg" width="70%" height="70%">
-
-<p>肥成球的浣熊</p>
-<img src="/2021/05/12/wu-yi-zhi-xing/41.jpg" width="70%" height="70%">
+<h5 id="3、在-dao-创建两个方法："><a href="#3、在-dao-创建两个方法：" class="headerlink" title="3、在 dao 创建两个方法："></a>3、在 dao 创建两个方法：</h5><p>多钱和少钱的方法，在 service 创建方法（转账的方法）</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Repository</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UserDaoImpl</span> <span class="token keyword">implements</span> <span class="token class-name">UserDao</span> <span class="token punctuation">{</span>
+ <span class="token annotation punctuation">@Autowired</span>
+ <span class="token keyword">private</span> <span class="token class-name">JdbcTemplate</span> jdbcTemplate<span class="token punctuation">;</span>
+ <span class="token comment">//lucy 转账 100 给 mary</span>
+ <span class="token comment">//少钱</span>
+ <span class="token annotation punctuation">@Override</span>
+ <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">reduceMoney</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+ <span class="token class-name">String</span> sql <span class="token operator">=</span> <span class="token string">"update t_account set money=money-? where username=?"</span><span class="token punctuation">;</span>
+ jdbcTemplate<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span>sql<span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">,</span><span class="token string">"lucy"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+ <span class="token comment">//多钱</span>
+ <span class="token annotation punctuation">@Override</span>
+ <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">addMoney</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+ <span class="token class-name">String</span> sql <span class="token operator">=</span> <span class="token string">"update t_account set money=money+? where username=?"</span><span class="token punctuation">;</span>
+ jdbcTemplate<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span>sql<span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">,</span><span class="token string">"mary"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 
 
+<span class="token annotation punctuation">@Service</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UserService</span> <span class="token punctuation">{</span>
+ <span class="token comment">//注入 dao</span>
+ <span class="token annotation punctuation">@Autowired</span>
+ <span class="token keyword">private</span> <span class="token class-name">UserDao</span> userDao<span class="token punctuation">;</span>
+ <span class="token comment">//转账的方法</span>
+ <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">accountMoney</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+ <span class="token comment">//lucy 少 100</span>
+ userDao<span class="token punctuation">.</span><span class="token function">reduceMoney</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token comment">//mary 多 100</span>
+ userDao<span class="token punctuation">.</span><span class="token function">addMoney</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>上海野生动物园还是很好玩，动物大都可以近距离观看，还有很多动物区可以投喂，动物的状态也很好，只是到动物园的时候正好中午，很多动物都在睡午觉<span class="github-emoji"><span>😂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>
-<p>晚上就从上海坐高铁到南京</p>
-<p>把东西放酒店就出去吃东西，酒店附近有家清真烧烤店，味道不错，价格有点小贵。</p>
-<img src="/2021/05/12/wu-yi-zhi-xing/1.jpg" width="70%" height="70%">
+<h5 id="4、上面代码，如果正常执行没有问题的"><a href="#4、上面代码，如果正常执行没有问题的" class="headerlink" title="4、上面代码，如果正常执行没有问题的"></a>4、上面代码，如果正常执行没有问题的</h5><p>但是如果代码执行过程中出现异常，有问题,如执行减少100后出现异常，没有再执行增加100的方法，如图：</p>
+<img src="/2021/05/08/spring-yi-shi-wu/模拟异常.png" width="70%" height="70%">
 
+<p>这时候需要用事务解决，</p>
+<p>事务操作过程：</p>
+<p>（1）开启事务</p>
+<p>（2）进行事务操作</p>
+<p>（3）没有异常时提交事务完成</p>
+<p>（4）发生异常时，进行事务回滚。</p>
+<h5 id="5、事务操作（注解声明式事务管理）"><a href="#5、事务操作（注解声明式事务管理）" class="headerlink" title="5、事务操作（注解声明式事务管理）"></a>5、事务操作（注解声明式事务管理）</h5><p>1、在 spring 配置文件配置事务管理器   </p>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token comment">&lt;!--创建事务管理器--&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>transactionManager<span class="token punctuation">"</span></span> 
+<span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>org.springframework.jdbc.datasource.DataSourceTransactionManager<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+ <span class="token comment">&lt;!--注入数据源--&gt;</span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>dataSource<span class="token punctuation">"</span></span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>dataSource<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p>2、在 spring 配置文件，开启事务注解 </p>
+<p>（1）在 spring 配置文件引入名称空间 tx</p>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>beans</span> <span class="token attr-name">xmlns</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.springframework.org/schema/beans<span class="token punctuation">"</span></span> 
+ <span class="token attr-name"><span class="token namespace">xmlns:</span>xsi</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.w3.org/2001/XMLSchema-instance<span class="token punctuation">"</span></span> 
+ <span class="token attr-name"><span class="token namespace">xmlns:</span>context</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.springframework.org/schema/context<span class="token punctuation">"</span></span> 
+ <span class="token attr-name"><span class="token namespace">xmlns:</span>aop</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.springframework.org/schema/aop<span class="token punctuation">"</span></span> 
+ <span class="token attr-name"><span class="token namespace">xmlns:</span>tx</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.springframework.org/schema/tx<span class="token punctuation">"</span></span> 
+ <span class="token attr-name"><span class="token namespace">xsi:</span>schemaLocation</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.springframework.org/schema/beans 
+http://www.springframework.org/schema/beans/spring-beans.xsd 
+ http://www.springframework.org/schema/context 
+http://www.springframework.org/schema/context/spring-context.xsd 
+ http://www.springframework.org/schema/aop 
+http://www.springframework.org/schema/aop/spring-aop.xsd  http://www.springframework.org/schema/tx 
+http://www.springframework.org/schema/tx/spring-tx.xsd<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="五月二号"><a href="#五月二号" class="headerlink" title="五月二号"></a>五月二号</h2><p>​        早上出门吃点早餐就去玄武湖公园，进入公园入口后，通过一段长桥上了环洲，<span class="github-emoji"><span>😄</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>
-<img src="/2021/05/12/wu-yi-zhi-xing/2.jpg" width="70%" height="70%">
+<p>（2）开启事务注解</p>
+<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token comment">&lt;!--开启事务注解--&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">tx:</span>annotation-driven</span> <span class="token attr-name">transaction-manager</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>transactionManager<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">tx:</span>annotation-driven</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<p>环洲和樱洲之间夹着一条小河，有很多游客在河中划皮划艇，</p>
-<img src="/2021/05/12/wu-yi-zhi-xing/3.jpg" width="70%" height="70%">
+<p>3、在 service 类上面（或者 service 类里面方法上面）添加事务注解 </p>
+<p>（1）@Transactional，这个注解添加到类上面，也可以添加方法上面 </p>
+<p>（2）如果把这个注解添加类上面，这个类里面所有的方法都添加事务 </p>
+<p>（3）如果把这个注解添加方法上面，为这个方法添加事务</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Service</span>
+<span class="token annotation punctuation">@Transactional</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UserService</span> <span class="token punctuation">{</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
-<img src="/2021/05/12/wu-yi-zhi-xing/4.jpg" width="70%" height="70%">
+<p>这样，在发生异常后就可以将已执行的操作回滚，返回至执行前的状态。</p>
+<h3 id="事务的特性"><a href="#事务的特性" class="headerlink" title="事务的特性"></a>事务的特性</h3><ul>
+<li><strong>原子性（Atomicity）</strong>：事务是一个原子操作，由一系列动作组成。事务的原子性确保动作要么全部完成，要么完全不起作用。</li>
+<li><strong>一致性（Consistency）</strong>：一旦事务完成（不管成功还是失败），系统必须确保它所建模的业务处于一致的状态，而不会是部分完成部分失败。在现实中的数据不应该被破坏。</li>
+<li><strong>隔离性（Isolation）</strong>：可能有许多事务会同时处理相同的数据，因此每个事务都应该与其他事务隔离开来，防止数据损坏。</li>
+<li><strong>持久性（Durability）</strong>：一旦事务完成，无论发生什么系统错误，它的结果都不应该受到影响，这样就能从任何系统崩溃中恢复过来。通常情况下，事务的结果被写到持久化存储器中。</li>
+</ul>
+<h3 id="Spring事务的配置方式"><a href="#Spring事务的配置方式" class="headerlink" title="Spring事务的配置方式"></a>Spring事务的配置方式</h3><p>Spring支持编程式事务管理以及声明式事务管理两种方式。</p>
+<h4 id="1-编程式事务管理"><a href="#1-编程式事务管理" class="headerlink" title="1. 编程式事务管理"></a>1. 编程式事务管理</h4><p>编程式事务管理是侵入性事务管理，使用TransactionTemplate或者直接使用PlatformTransactionManager，对于编程式事务管理，Spring推荐使用TransactionTemplate。</p>
+<h4 id="2-声明式事务管理"><a href="#2-声明式事务管理" class="headerlink" title="2. 声明式事务管理"></a>2. 声明式事务管理</h4><p>​        声明式事务管理建立在AOP之上，其本质是对方法前后进行拦截，然后在目标方法开始之前创建或者加入一个事务，执行完目标方法之后根据执行的情况提交或者回滚。<br>​        编程式事务每次实现都要单独实现，但业务量大功能复杂时，使用编程式事务无疑是痛苦的，而声明式事务不同，声明式事务属于无侵入式，不会影响业务逻辑的实现，只需要在配置文件中做相关的事务规则声明或者通过注解的方式，便可以将事务规则应用到业务逻辑中。<br>​        显然声明式事务管理要优于编程式事务管理，这正是Spring倡导的非侵入式的编程方式。唯一不足的地方就是声明式事务管理的粒度是方法级别，而编程式事务管理是可以到代码块的，但是可以通过提取方法的方式完成声明式事务管理的配置。</p>
+<h3 id="事务的传播机制"><a href="#事务的传播机制" class="headerlink" title="事务的传播机制"></a>事务的传播机制</h3><p>​        事务的传播性一般用在事务嵌套的场景，比如一个事务方法里面调用了另外一个事务方法，那么两个方法是各自作为独立的方法提交还是内层的事务合并到外层的事务一起提交，这就是需要事务传播机制的配置来确定怎么样执行。<br>常用的事务传播机制如下：</p>
+<ul>
+<li>PROPAGATION_REQUIRED<br>Spring默认的传播机制，能满足绝大部分业务需求，如果外层有事务，则当前事务加入到外层事务，一块提交，一块回滚。如果外层没有事务，新建一个事务执行</li>
+<li>PROPAGATION_REQUES_NEW<br>该事务传播机制是每次都会新开启一个事务，同时把外层事务挂起，当当前事务执行完毕，恢复上层事务的执行。如果外层没有事务，执行当前新开启的事务即可</li>
+<li>PROPAGATION_SUPPORT<br>如果外层有事务，则加入外层事务，如果外层没有事务，则直接使用非事务方式执行。完全依赖外层的事务</li>
+<li>PROPAGATION_NOT_SUPPORT<br>该传播机制不支持事务，如果外层存在事务则挂起，执行完当前代码，则恢复外层事务，无论是否异常都不会回滚当前的代码</li>
+<li>PROPAGATION_NEVER<br>该传播机制不支持外层事务，即如果外层有事务就抛出异常</li>
+<li>PROPAGATION_MANDATORY<br>与NEVER相反，如果外层没有事务，则抛出异常</li>
+<li>PROPAGATION_NESTED<br>该传播机制的特点是可以保存状态保存点，当前事务回滚到某一个点，从而避免所有的嵌套事务都回滚，即各自回滚各自的，如果子事务没有把异常吃掉，基本还是会引起全部回滚的。</li>
+</ul>
+<h3 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别"></a>事务的隔离级别</h3><h4 id="事务并发引起的三种情况"><a href="#事务并发引起的三种情况" class="headerlink" title="事务并发引起的三种情况"></a>事务并发引起的三种情况</h4><p><strong>脏读（Dirty Reads ）</strong><br>        一个事务正在对数据进行更新操作，但是更新还未提交，另一个事务这时也来操作这组数据，并且读取了前一个事务还未提交的数据，而前一个事务如果操作失败进行了回滚，后一个事务读取的就是错误数据，这样就造成了脏读。</p>
+<p><strong>不可重复读（Non-Repeatable Reads ）</strong><br>        一个事务多次读取同一数据，在该事务还未结束时，另一个事务也对该数据进行了操作，而且在第一个事务两次次读取之间，第二个事务对数据进行了更新，那么第一个事务前后两次读取到的数据是不同的，这样就造成了不可重复读。</p>
+<p><strong>幻读（Phantom Reads ）</strong><br>第一个数据正在查询符合某一条件的数据，这时，另一个事务又插入了一条符合条件的数据，第一个事务在第二次查询符合同一条件的数据时，发现多了一条前一次查询时没有的数据，仿佛幻觉一样，这就是幻像读。</p>
+<h4 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a><strong>隔离级别</strong></h4><p><strong>DEFAULT （默认）</strong><br>这是一个PlatfromTransactionManager默认的隔离级别，使用数据库默认的事务隔离级别。另外四个与JDBC的隔离级别相对应。</p>
+<p> <strong>READ_UNCOMMITTED （读未提交）</strong><br>这是事务最低的隔离级别，它允许另外一个事务可以看到这个事务未提交的数据。这种隔离级别会产生脏读，不可重复读和幻像读。 </p>
+<p><strong>READ_COMMITTED （读已提交）</strong><br>保证一个事务修改的数据提交后才能被另外一个事务读取，另外一个事务不能读取该事务未提交的数据。这种事务隔离级别可以避免脏读出现，但是可能会出现不可重复读和幻像读。 </p>
+<p><strong>REPEATABLE_READ （可重复读）</strong><br>这种事务隔离级别可以防止脏读、不可重复读，但是可能出现幻像读。它除了保证一个事务不能读取另一个事务未提交的数据外，还保证了不可重复读。</p>
+<p><strong>SERIALIZABLE（串行化）</strong><br>这是花费最高代价但是最可靠的事务隔离级别，事务被处理为顺序执行。除了防止脏读、不可重复读外，还避免了幻像读。 </p>
+<h4 id="隔离级别解决事务并行引起的问题"><a href="#隔离级别解决事务并行引起的问题" class="headerlink" title="隔离级别解决事务并行引起的问题"></a><strong>隔离级别解决事务并行引起的问题</strong></h4><img src="/2021/05/08/spring-yi-shi-wu/事务隔离级别.png" width="70%" height="70%">
 
-<p>围着逛一圈后通过石桥走上樱洲，岛上四处逛逛后又通过芳桥到了粱洲，</p>
-<img src="/2021/05/12/wu-yi-zhi-xing/5.jpg" width="70%" height="70%">
-
-<p>​    岛上很多大树，造型奇特，</p>
-<img src="/2021/05/12/wu-yi-zhi-xing/6.jpg" width="70%" height="70%">
-
-<p>一间书屋</p>
-<img src="/2021/05/12/wu-yi-zhi-xing/7.jpg" width="70%" height="70%">
-
-<p>从粱洲后面经过盆景园，上桥走去翠洲</p>
-<img src="/2021/05/12/wu-yi-zhi-xing/8.jpg" width="70%" height="70%">
-
-<img src="/2021/05/12/wu-yi-zhi-xing/9.jpg" width="70%" height="70%">
-
-<p>看见翠洲中有鲤鱼塘便买包鱼饵想喂喂鲤鱼，可惜池边人太多。再经过走出翠洲一路向东走进玄武湖东北岸的情侣园。<span class="github-emoji"><span>🐤</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f424.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>🐤</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f424.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>
-<img src="/2021/05/12/wu-yi-zhi-xing/10.jpg" width="70%" height="70%">
-
-
-
-<p>走出玄武湖公园后，太累了临时决定改变计划，今晚去夫子庙步行街，明天再去钟山风景区。</p>
-<p>解决肚子饿后就慢慢步行去夫子庙。<span class="github-emoji"><span>😋</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f60b.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😋</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f60b.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>
-<img src="/2021/05/12/wu-yi-zhi-xing/11.jpg" width="70%" height="70%">
-
-<p><span class="github-emoji"><span>🐱</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f431.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>🐱</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f431.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>
-<img src="/2021/05/12/wu-yi-zhi-xing/15.jpg" width="70%" height="70%">
-
-<p>途径一处商城，</p>
-<img src="/2021/05/12/wu-yi-zhi-xing/12.jpg" width="50%" height="50%">
-
-<p>夫子庙入口对面，人挤人~~~~<span class="github-emoji"><span>😭</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f62d.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😭</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f62d.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>
-<img src="/2021/05/12/wu-yi-zhi-xing/13.jpg" width="70%" height="70%">
-
-<p>挤到秦淮河边，实在是挤不过去<span class="github-emoji"><span>😩</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f629.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😩</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f629.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>
-<p>不想走了就顺着人群往出口走去，走出出口后回头拍一张。</p>
-<img src="/2021/05/12/wu-yi-zhi-xing/14.jpg" width="70%" height="70%">
-
-<p>结束今天，回酒店休息。</p>
-<h2 id="五月三号"><a href="#五月三号" class="headerlink" title="五月三号"></a>五月三号</h2><p>之前计划去大屠杀纪念馆时，在手机上一直没找到预约途径，三号早上醒来后突然想到试试微信上搜搜官方公众后，发现有官方微信公众号可以预定，可惜，五一期间的早已经被预约满了，这次应该去不成了。<span class="github-emoji"><span>😢</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f622.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>二号赶地铁时经过了纪念馆旁边的一个地铁站，只从远处观望了下。</p>
-<p>于是决定今天就只去钟山风景区，</p>
-<p>中午找了家连锁川菜店，味道极好，<span class="github-emoji"><span>😋</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f60b.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>，吃午饭后就前往钟山景区。</p>
-<p>由于二号走得实在是太久，刚走进景区时就又有些累了，<span class="github-emoji"><span>😅</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f605.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😅</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f605.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>
-<p>游玩的时候就走走停停，感觉也十分不错。</p>
-<img src="/2021/05/12/wu-yi-zhi-xing/16.jpg" width="70%" height="70%">
-
-<p>看过地图后决定先去明孝陵，便顺着明孝陵的方向走去，</p>
-<img src="/2021/05/12/wu-yi-zhi-xing/17.jpg" width="70%" height="70%">
-
-<p>大路人多，大路旁的小径人很少，随着小路走感觉十分惬意。</p>
-<img src="/2021/05/12/wu-yi-zhi-xing/18.jpg" width="70%" height="70%">
-
-<img src="/2021/05/12/wu-yi-zhi-xing/19.jpg" width="70%" height="70%">
-
-<p>文武方门</p>
-<img src="/2021/05/12/wu-yi-zhi-xing/20.jpg" width="70%" height="70%">
-
-<p>进入文武方门后匆匆逛了逛，出来后已经十分疲惫，时间也不早了，最后决定在去明孝陵后面的紫霞湖看看就结束此行。</p>
-<p>原路出来后，从旁边一条岔路走去紫霞湖。</p>
-<img src="/2021/05/12/wu-yi-zhi-xing/21.jpg" width="50%" height="50%">
-
-<p>有种曲径通幽处的感觉，向上走了一两百米后，豁然开朗，半山腰的紫霞湖映入眼帘，看到这般景色顿时觉得不虚此行了。<span class="github-emoji"><span>😲</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f632.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😲</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f632.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>
-<img src="/2021/05/12/wu-yi-zhi-xing/22.jpg" width="70%" height="70%">
-
-<p>湖水十分清澈，<span class="github-emoji"><span>😄</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😄</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>
-<img src="/2021/05/12/wu-yi-zhi-xing/23.jpg" width="70%" height="70%">
-
-<img src="/2021/05/12/wu-yi-zhi-xing/24.jpg" width="70%" height="70%">
-
-<img src="/2021/05/12/wu-yi-zhi-xing/27.jpg" width="70%" height="70%">
-
-<p>湖边稍作休息，围着湖慢慢走了一周。</p>
-<p>远处的缆车，</p>
-<img src="/2021/05/12/wu-yi-zhi-xing/25.jpg" width="70%" height="70%">
-
-<p>”天池“</p>
-<img src="/2021/05/12/wu-yi-zhi-xing/26.jpg" width="70%" height="70%">
-
-<p>太棒了太棒了<span class="github-emoji"><span>😁</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f601.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😁</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f601.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😁</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f601.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😁</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f601.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😁</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f601.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>
-<p>最后离开紫霞湖后就结束了今天的行程。</p>
-<h2 id="五月四号"><a href="#五月四号" class="headerlink" title="五月四号"></a>五月四号</h2><p>五月四号上午离开了南京，返回上海后放置好行李后就前往南京东路步行街，人虽然多但却不拥挤</p>
-<img src="/2021/05/12/wu-yi-zhi-xing/28.jpg" width="50%" height="50%">
-
-<p>顺着南京东路走向时代外滩，想看看时代外滩的夜景，</p>
-<img src="/2021/05/12/wu-yi-zhi-xing/29.jpg" width="70%" height="70%">
-
-<p>来得有些早，在江边顶着江风等着天黑，天还下着毛毛雨。。。。<span class="github-emoji"><span>😢</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f622.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😢</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f622.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😢</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f622.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>
-<img src="/2021/05/12/wu-yi-zhi-xing/30.jpg" width="70%" height="70%">
-
-<img src="/2021/05/12/wu-yi-zhi-xing/31.jpg" width="70%" height="70%">
-
-<p>等到天完全黑后~~~~<span class="github-emoji"><span>😄</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😄</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😄</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>
-<img src="/2021/05/12/wu-yi-zhi-xing/32.jpg" width="70%" height="70%">
-
-<p>看完灯光表演后就顺着南京东路慢慢走回去了，最后再看看南京东路的夜景。</p>
-<img src="/2021/05/12/wu-yi-zhi-xing/33.jpg" width="70%" height="70%">
+<hr>
+<img src="/2021/05/08/spring-yi-shi-wu/0.jpg" width="70%" height="70%">
 
 
 
-<h2 id="五月五号"><a href="#五月五号" class="headerlink" title="五月五号"></a>五月五号</h2><p>五一最后一天，睡个懒觉，起床后吃过午饭，便离开上海坐飞机返回学校去了。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这次五一之行相当充实，唯一遗憾的就是没去成大屠杀纪念馆，下次再到南京不知是什么时候了，可惜。</p>
-<p>计划逛钟山景区的时候买了景区中还几个景点的门票，结果只去了明孝陵一个<span class="github-emoji"><span>😂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span>，钟山景区的三分之一都没逛完，眼睛大肚皮小了<span class="github-emoji"><span>😂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😂</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f602.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>
 
                 
             </div>
@@ -651,7 +607,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">lemonjelly</a>
+                    <a href="/about" rel="external nofollow noreferrer">LemonJelly</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -661,7 +617,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://lemonjelly1124.github.io/2021/05/12/wu-yi-zhi-xing/">http://lemonjelly1124.github.io/2021/05/12/wu-yi-zhi-xing/</a>
+                    <a href="http://lemonjelly1124.github.io/2021/05/08/spring-yi-shi-wu/">http://lemonjelly1124.github.io/2021/05/08/spring-yi-shi-wu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -674,7 +630,7 @@
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">lemonjelly</a>
+                    <a href="/about" target="_blank">LemonJelly</a>
                     !
                 </span>
             </div>
@@ -699,12 +655,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E7%94%9F%E6%B4%BB/">
-                                    <span class="chip bg-color">生活</span>
+                                <a href="/tags/%E5%AD%A6%E4%B9%A0/">
+                                    <span class="chip bg-color">学习</span>
                                 </a>
                             
-                                <a href="/tags/%E6%97%85%E8%A1%8C/">
-                                    <span class="chip bg-color">旅行</span>
+                                <a href="/tags/spring/">
+                                    <span class="chip bg-color">spring</span>
                                 </a>
                             
                         </div>
@@ -1020,13 +976,12 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/07/15/java-ji-he-map-he-hashmap/">
+                <a href="/2021/05/10/tupian/">
                     <div class="card-image">
                         
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="tupian">
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="java集合Map和HashMap">
-                        
-                        <span class="card-title">java集合Map和HashMap</span>
+                        <span class="card-title">tupian</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1037,7 +992,7 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-07-15
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-05-10
                         </span>
                         <span class="publish-author">
                             
@@ -1046,6 +1001,14 @@
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E6%B5%8B%E8%AF%95/">
+                        <span class="chip bg-color">测试</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -1057,12 +1020,12 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/05/10/mybatis-yi-fen-ye/">
+                <a href="/2021/05/06/hello-world/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="Mybatis(一)————分页">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="Hello World">
                         
-                        <span class="card-title">Mybatis(一)————分页</span>
+                        <span class="card-title">Hello World</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1073,31 +1036,15 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-10
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-06
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                    学习
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            LemonJelly
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E5%AD%A6%E4%B9%A0/">
-                        <span class="chip bg-color">学习</span>
-                    </a>
-                    
-                    <a href="/tags/Mybatis/">
-                        <span class="chip bg-color">Mybatis</span>
-                    </a>
-                    
                 </div>
                 
             </div>
