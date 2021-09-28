@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Spring(一)————事务, LemonJelly&#39;Blog">
+    <meta name="keywords" content="SpringBoot整合MongoDB和部分常用操作, LemonJelly&#39;Blog">
     <meta name="description" content="软件工程大三学生">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Spring(一)————事务 | LemonJelly&#39;Blog</title>
+    <title>SpringBoot整合MongoDB和部分常用操作 | LemonJelly&#39;Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -268,12 +268,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Spring(一)————事务</h1>
+                    <h1 class="description center-align post-title">SpringBoot整合MongoDB和部分常用操作</h1>
                 </div>
             </div>
         </div>
@@ -393,8 +393,16 @@
                                 <span class="chip bg-color">学习</span>
                             </a>
                         
-                            <a href="/tags/spring/">
-                                <span class="chip bg-color">spring</span>
+                            <a href="/tags/MongoDB/">
+                                <span class="chip bg-color">MongoDB</span>
+                            </a>
+                        
+                            <a href="/tags/SpringBoot/">
+                                <span class="chip bg-color">SpringBoot</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                                <span class="chip bg-color">数据库</span>
                             </a>
                         
                     </div>
@@ -418,7 +426,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-05-08
+                    2021-09-28
                 </div>
                 
 
@@ -427,14 +435,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.4k
+                    805
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    4 分
                 </div>
                 
 
@@ -457,141 +465,208 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Spring事务传播机制"><a href="#Spring事务传播机制" class="headerlink" title="Spring事务传播机制"></a>Spring事务传播机制</h2><h3 id="什么是事务？"><a href="#什么是事务？" class="headerlink" title="什么是事务？"></a>什么是事务？</h3><p>​        事务是数据库操作最基本单元，逻辑上一组操作，要么都成功，如果有一个失败所有操 作都失败</p>
-<h4 id="典型场景：银行转账"><a href="#典型场景：银行转账" class="headerlink" title="典型场景：银行转账"></a>典型场景：<strong>银行转账</strong></h4><p>lucy 转账 100 元 给 mary </p>
-<p>lucy 少 100，mary 多 100。</p>
-<h5 id="1-创建数据库，添加记录"><a href="#1-创建数据库，添加记录" class="headerlink" title="1.创建数据库，添加记录"></a>1.创建数据库，添加记录</h5><img src="/2021/05/08/spring-yi-shi-wu/数据库1.png" width="70%" height="70%">
+                <h1 id="SpringBoot整合MongoDB和部分常用操作"><a href="#SpringBoot整合MongoDB和部分常用操作" class="headerlink" title="SpringBoot整合MongoDB和部分常用操作"></a><strong>SpringBoot整合MongoDB和部分常用操作</strong></h1><h3 id="使用MongoTemplate方式"><a href="#使用MongoTemplate方式" class="headerlink" title="使用MongoTemplate方式"></a><strong>使用MongoTemplate方式</strong></h3><h4 id="实体类"><a href="#实体类" class="headerlink" title="实体类:"></a><strong>实体类:</strong></h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Data</span>
+<span class="token annotation punctuation">@NoArgsConstructor</span>
+<span class="token annotation punctuation">@AllArgsConstructor</span>
+<span class="token annotation punctuation">@Document</span><span class="token punctuation">(</span><span class="token string">"student"</span><span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Student</span> <span class="token keyword">implements</span> <span class="token class-name">Serializable</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Id</span><span class="token comment">//   主键</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> studentId<span class="token punctuation">;</span>
 
-<h5 id="2、创建-service，搭建-dao，完成对象创建和注入关系"><a href="#2、创建-service，搭建-dao，完成对象创建和注入关系" class="headerlink" title="2、创建 service，搭建 dao，完成对象创建和注入关系"></a>2、创建 service，搭建 dao，完成对象创建和注入关系</h5><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//service 注入 dao，在 dao 注入 JdbcTemplate，在 JdbcTemplate 注入 DataSource</span>
-<span class="token annotation punctuation">@Service</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UserService</span> <span class="token punctuation">{</span>
- <span class="token comment">//注入 dao</span>
- <span class="token annotation punctuation">@Autowired</span>
- <span class="token keyword">private</span> <span class="token class-name">UserDao</span> userDao<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> studentName<span class="token punctuation">;</span>
+
+    <span class="token keyword">private</span> <span class="token class-name">Integer</span> studentAge<span class="token punctuation">;</span>
+
+    <span class="token keyword">private</span> <span class="token class-name">Integer</span> studentScore<span class="token punctuation">;</span>
+    
+    <span class="token keyword">private</span> <span class="token class-name">String</span> studentSex<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="Dao接口部分"><a href="#Dao接口部分" class="headerlink" title="Dao接口部分:"></a><strong>Dao接口部分:</strong></h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">StudentDaoTypeTwo</span> <span class="token punctuation">{</span>
+
+<span class="token comment">//  增加一位学生</span>
+
+  <span class="token keyword">void</span> <span class="token function">addOneStudent</span><span class="token punctuation">(</span><span class="token class-name">Student</span> student<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="Dao实现类"><a href="#Dao实现类" class="headerlink" title="Dao实现类:"></a><strong>Dao实现类:</strong></h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">StudentDaoTwoImpl</span> <span class="token keyword">implements</span> <span class="token class-name">StudentDaoTwo</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">//使用MongoTemplate进行数据库操作</span>
+    <span class="token annotation punctuation">@Autowired</span>
+    <span class="token keyword">private</span> <span class="token class-name">MongoTemplate</span> mongoTemplate<span class="token punctuation">;</span>
+
+	 <span class="token comment">//增加学生</span>
+<span class="token annotation punctuation">@Override</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">addStudent</span><span class="token punctuation">(</span><span class="token class-name">Student</span> student<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    mongoTemplate<span class="token punctuation">.</span><span class="token function">save</span><span class="token punctuation">(</span>student<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token annotation punctuation">@Repository</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UserDaoImpl</span> <span class="token keyword">implements</span> <span class="token class-name">UserDao</span> <span class="token punctuation">{</span>
- <span class="token annotation punctuation">@Autowired</span> <span class="token keyword">private</span> <span class="token class-name">JdbcTemplate</span> jdbcTemplate<span class="token punctuation">;</span>
+
 <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="测试类"><a href="#测试类" class="headerlink" title="测试类:"></a><strong>测试类:</strong></h4><pre class="line-numbers language-JAVA" data-language="JAVA"><code class="language-JAVA">@SpringBootTest
+public class StudentDemoTwoTest {
+
+    @Autowired
+    private StudentDaoTwo studentDaoTwo;
+
+    //添加测试
+    @Test
+    public void addStudentTest(){
+        Student student=new Student();
+        student.setStudentId("demo2id")
+                .setStudentName("demo2name")
+                .setStudentAge(20)
+                .setStudentScore(98);
+        studentDaoTwo.addStudent(student);
+    }
+
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作:"></a><strong>常用操作:</strong></h3><p><strong>写在实现类中的方法</strong></p>
+<h4 id="修改操作"><a href="#修改操作" class="headerlink" title="修改操作:"></a><strong>修改操作:</strong></h4><pre class="line-numbers language-JAVA" data-language="JAVA"><code class="language-JAVA">//修改学生信息
+@Override
+public void updateStudent(Student student) {
+    //判断条件
+    Query query=new Query(Criteria.where("_id").is(student.getStudentId()));
+    //修改信息
+    Update update=new Update();
+    update.set("studentName",student.getStudentName());
+    update.set("studentSex",student.getStudentSex());
+    update.set("studentScore",student.getStudentScore());
+    mongoTemplate.updateFirst(query,update,Student.class);
+
+}
+	<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="删除操作"><a href="#删除操作" class="headerlink" title="删除操作:"></a><strong>删除操作:</strong></h4><pre class="line-numbers language-JAVA" data-language="JAVA"><code class="language-JAVA">//删除学生
+@Override
+public void deleteStudentByStudentId(String studentId) {
+    Query query=new Query(Criteria.where("_id").is(studentId));
+    mongoTemplate.remove(query,Student.class);
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="查询全部"><a href="#查询全部" class="headerlink" title="查询全部:"></a><strong>查询全部:</strong></h4><pre class="line-numbers language-JAVA" data-language="JAVA"><code class="language-JAVA">//查询出所有学生
+@Override
+public List&lt;Student&gt; getAllStudent() {
+    return mongoTemplate.findAll(Student.class);
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="条件查询"><a href="#条件查询" class="headerlink" title="条件查询:"></a><strong>条件查询:</strong></h4><pre class="line-numbers language-JAVA" data-language="JAVA"><code class="language-JAVA">//条件查询
+@Override
+public Student getStudent(Student student) {
+    Query query=new Query();    
+   //query.addCriteria(Criteria.where("_id").is(student.getStudentId())); //可累加条件
+    query.addCriteria(Criteria.where("studentName").is(student.getStudentName()));
+    query.addCriteria(Criteria.where("studentAge").is(student.getStudentAge()));
+    return mongoTemplate.findOne(query, Student.class);
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="模糊查询"><a href="#模糊查询" class="headerlink" title="模糊查询:"></a><strong>模糊查询:</strong></h4><pre class="line-numbers language-JAVA" data-language="JAVA"><code class="language-JAVA">//模糊查询
+@Override
+public List&lt;Student&gt; getStudentList() {
+    Query query=new Query();
+    //Criteria.where("studentName").regex("填写匹配字符")
+    query.addCriteria(Criteria.where("studentName").regex("lijin"));    
+    return mongoTemplate.find(query,Student.class);
+}
+
+//模糊查询	采用正则表达式匹配查询
+@Override
+public List&lt;Student&gt; getStudentList() {
+    //正则  name是你需要输入的查询值
+    Pattern pattern =Pattern.compile("^.*"+"lijin"+".*$",Pattern.CASE_INSENSITIVE);                                                                                  
+    //创建查询对象
+    Query query = new Query();
+    //设置模糊查询
+    query.addCriteria(Criteria.where("studentName").regex(pattern));
+    return mongoTemplate.find(query, Student.class); 
+}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="查询条件-大于小于，大于等于，小于等于-非空"><a href="#查询条件-大于小于，大于等于，小于等于-非空" class="headerlink" title="查询条件: 大于小于，大于等于，小于等于 , 非空"></a><strong>查询条件: 大于小于，大于等于，小于等于 , 非空</strong></h3><p><strong>大于: gt()</strong></p>
+<pre class="line-numbers language-JAVA" data-language="JAVA"><code class="language-JAVA">query .addCriteria(Criteria.where("studentAge").gt(student.getStudentAge()));<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>小于: lt()</strong></p>
+<pre class="line-numbers language-JAVA" data-language="JAVA"><code class="language-JAVA">query .addCriteria(Criteria.where("studentAge").lt(student.getStudentAge()));<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>大于等于: gte()</strong></p>
+<pre class="line-numbers language-JAVA" data-language="JAVA"><code class="language-JAVA">query .addCriteria(Criteria.where("studentAge").gte(student.getStudentAge()));<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>小于等于: lte()</strong></p>
+<pre class="line-numbers language-JAVA" data-language="JAVA"><code class="language-JAVA">query .addCriteria(Criteria.where("studentAge").lte(student.getStudentAge()));<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>非空查询 ne() 不等于</strong></p>
+<pre class="line-numbers language-JAVA" data-language="JAVA"><code class="language-JAVA">query .addCriteria(Criteria.where("studentAge").ne("").ne(null));<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>in(nin)</strong> <strong>在(不在)范围类查询:</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//在范围类查询   in()中可以是一个或多个想同类型的参数,也可以传入一个集合</span>
+query<span class="token punctuation">.</span><span class="token function">addCriteria</span><span class="token punctuation">(</span><span class="token class-name">Criteria</span><span class="token punctuation">.</span><span class="token function">where</span><span class="token punctuation">(</span><span class="token string">"age"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">in</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><strong>统计数量</strong></p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Int</span> count<span class="token operator">=</span>mongoTemplate<span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span>query<span class="token punctuation">,</span> <span class="token class-name">Student</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id=""><a href="#" class="headerlink" title=""></a></h4><h3 id="排序操作"><a href="#排序操作" class="headerlink" title="排序操作"></a><strong>排序操作</strong></h3><h4 id="单个字段排序"><a href="#单个字段排序" class="headerlink" title="单个字段排序:"></a><strong>单个字段排序:</strong></h4><pre class="line-numbers language-java" data-language="java"><code class="language-java">query<span class="token punctuation">.</span><span class="token keyword">with</span><span class="token punctuation">(</span><span class="token class-name">Sort</span><span class="token punctuation">.</span><span class="token function">by</span><span class="token punctuation">(</span><span class="token class-name">Sort<span class="token punctuation">.</span>Direction</span><span class="token punctuation">.</span>ASC<span class="token punctuation">,</span> <span class="token string">"studentAge"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h4 id="多个字段排序"><a href="#多个字段排序" class="headerlink" title="多个字段排序:"></a><strong>多个字段排序:</strong></h4><pre class="line-numbers language-java" data-language="java"><code class="language-java">query<span class="token punctuation">.</span><span class="token keyword">with</span><span class="token punctuation">(</span><span class="token class-name">Sort</span><span class="token punctuation">.</span><span class="token function">by</span><span class="token punctuation">(</span><span class="token class-name">Sort<span class="token punctuation">.</span>Direction</span><span class="token punctuation">.</span>ASC<span class="token punctuation">,</span> <span class="token string">"studentAge"</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">and</span><span class="token punctuation">(</span><span class="token class-name">Sort</span><span class="token punctuation">.</span><span class="token function">by</span><span class="token punctuation">(</span><span class="token class-name">Sort<span class="token punctuation">.</span>Direction</span><span class="token punctuation">.</span>ASC<span class="token punctuation">,</span> <span class="token string">"studentScore"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h4 id="复杂操作"><a href="#复杂操作" class="headerlink" title="复杂操作:"></a><strong>复杂操作</strong>:</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Query</span> query <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Query</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">Criteria</span> criteria <span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Criteria</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">//下面条件相当于select * from student where studentage in(16,32) and studentSex=’男’ and student&lt;=80 and (studentGrade =3 or studentGrade =4)</span>
+criteria<span class="token punctuation">.</span><span class="token function">and</span><span class="token punctuation">(</span><span class="token string">"studentAge"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">in</span><span class="token punctuation">(</span><span class="token number">16</span><span class="token punctuation">,</span><span class="token number">32</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">andOperator</span><span class="token punctuation">(</span><span class="token class-name">Criteria</span><span class="token punctuation">.</span><span class="token function">where</span><span class="token punctuation">(</span><span class="token string">"studenSex"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">is</span><span class="token punctuation">(</span><span class="token string">"男"</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">and</span><span class="token punctuation">(</span><span class="token string">"studentScore"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">lte</span><span class="token punctuation">(</span><span class="token string">"80"</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">orOperator</span><span class="token punctuation">(</span><span class="token class-name">Criteria</span><span class="token punctuation">.</span><span class="token function">where</span><span class="token punctuation">(</span><span class="token string">"studentGrade"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">is</span><span class="token punctuation">(</span><span class="token string">"3"</span><span class="token punctuation">)</span>
+                <span class="token punctuation">,</span><span class="token class-name">Criteria</span><span class="token punctuation">.</span><span class="token function">where</span><span class="token punctuation">(</span><span class="token string">"studentGrade "</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">is</span><span class="token punctuation">(</span><span class="token string">"4"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+query<span class="token punctuation">.</span><span class="token function">addCriteria</span><span class="token punctuation">(</span>criteria<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">return</span> mongoTemplate<span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span>query<span class="token punctuation">,</span> <span class="token class-name">Student</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h5 id="3、在-dao-创建两个方法："><a href="#3、在-dao-创建两个方法：" class="headerlink" title="3、在 dao 创建两个方法："></a>3、在 dao 创建两个方法：</h5><p>多钱和少钱的方法，在 service 创建方法（转账的方法）</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Repository</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UserDaoImpl</span> <span class="token keyword">implements</span> <span class="token class-name">UserDao</span> <span class="token punctuation">{</span>
- <span class="token annotation punctuation">@Autowired</span>
- <span class="token keyword">private</span> <span class="token class-name">JdbcTemplate</span> jdbcTemplate<span class="token punctuation">;</span>
- <span class="token comment">//lucy 转账 100 给 mary</span>
- <span class="token comment">//少钱</span>
- <span class="token annotation punctuation">@Override</span>
- <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">reduceMoney</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
- <span class="token class-name">String</span> sql <span class="token operator">=</span> <span class="token string">"update t_account set money=money-? where username=?"</span><span class="token punctuation">;</span>
- jdbcTemplate<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span>sql<span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">,</span><span class="token string">"lucy"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
- <span class="token punctuation">}</span>
- <span class="token comment">//多钱</span>
- <span class="token annotation punctuation">@Override</span>
- <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">addMoney</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
- <span class="token class-name">String</span> sql <span class="token operator">=</span> <span class="token string">"update t_account set money=money+? where username=?"</span><span class="token punctuation">;</span>
- jdbcTemplate<span class="token punctuation">.</span><span class="token function">update</span><span class="token punctuation">(</span>sql<span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">,</span><span class="token string">"mary"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
- <span class="token punctuation">}</span>
+<h3 id="分页查询操作"><a href="#分页查询操作" class="headerlink" title="分页查询操作:"></a><strong>分页查询操作:</strong></h3><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">//分页操作</span>
+<span class="token keyword">public</span> <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Student</span><span class="token punctuation">&gt;</span></span> <span class="token function">findStudentPage</span><span class="token punctuation">(</span><span class="token class-name">String</span> studentName<span class="token punctuation">,</span> <span class="token keyword">int</span> page <span class="token punctuation">,</span> <span class="token keyword">int</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    
+    <span class="token comment">//创建查询对象</span>
+    <span class="token class-name">Query</span> query <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Query</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//分页</span>
+    <span class="token class-name">Pageable</span> pageable<span class="token operator">=</span>
+		<span class="token class-name">PageRequest</span><span class="token punctuation">.</span><span class="token function">of</span><span class="token punctuation">(</span>page<span class="token punctuation">,</span>nums<span class="token punctuation">,</span><span class="token class-name">Sort<span class="token punctuation">.</span>Direction</span><span class="token punctuation">.</span>ASC<span class="token punctuation">,</span>studentName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//正则</span>
+    <span class="token class-name">Pattern</span>  pattern <span class="token operator">=</span> <span class="token class-name">Pattern</span><span class="token punctuation">.</span><span class="token function">compile</span><span class="token punctuation">(</span><span class="token string">"^.*"</span><span class="token operator">+</span>studentName<span class="token operator">+</span><span class="token string">".*$"</span><span class="token punctuation">,</span> <span class="token class-name">Pattern</span><span class="token punctuation">.</span>CASE_INSENSITIVE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">//设置模糊查询</span>
+    query<span class="token punctuation">.</span><span class="token function">addCriteria</span><span class="token punctuation">(</span><span class="token class-name">Criteria</span><span class="token punctuation">.</span><span class="token function">where</span><span class="token punctuation">(</span><span class="token string">"studentName"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">regex</span><span class="token punctuation">(</span>pattern<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//排序</span>
+    query<span class="token punctuation">.</span><span class="token keyword">with</span><span class="token punctuation">(</span><span class="token class-name">Sort</span><span class="token punctuation">.</span><span class="token function">by</span><span class="token punctuation">(</span><span class="token class-name">Sort<span class="token punctuation">.</span>Direction</span><span class="token punctuation">.</span>ASC<span class="token punctuation">,</span> <span class="token string">"StudentAge"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">//设置分页</span>
+    query<span class="token punctuation">.</span><span class="token keyword">with</span><span class="token punctuation">(</span>pageable<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">//查询当前页数据集合</span>
+    <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Student</span><span class="token punctuation">&gt;</span></span> studentList <span class="token operator">=</span> mongoTemplate<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>query<span class="token punctuation">,</span> <span class="token class-name">Student</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">Student</span> student<span class="token operator">:</span>studentList<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>student<span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token string">"!!!!!!!!!!!!!!!!!!!!!!!!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">//查询总记录数</span>
+    <span class="token class-name">Long</span> count<span class="token operator">=</span>mongoTemplate<span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span>query<span class="token punctuation">,</span><span class="token class-name">Student</span><span class="token punctuation">.</span><span class="token keyword">class</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> studentList<span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-
-<span class="token annotation punctuation">@Service</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UserService</span> <span class="token punctuation">{</span>
- <span class="token comment">//注入 dao</span>
- <span class="token annotation punctuation">@Autowired</span>
- <span class="token keyword">private</span> <span class="token class-name">UserDao</span> userDao<span class="token punctuation">;</span>
- <span class="token comment">//转账的方法</span>
- <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">accountMoney</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
- <span class="token comment">//lucy 少 100</span>
- userDao<span class="token punctuation">.</span><span class="token function">reduceMoney</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
- <span class="token comment">//mary 多 100</span>
- userDao<span class="token punctuation">.</span><span class="token function">addMoney</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
- <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h5 id="4、上面代码，如果正常执行没有问题的"><a href="#4、上面代码，如果正常执行没有问题的" class="headerlink" title="4、上面代码，如果正常执行没有问题的"></a>4、上面代码，如果正常执行没有问题的</h5><p>但是如果代码执行过程中出现异常，有问题,如执行减少100后出现异常，没有再执行增加100的方法，如图：</p>
-<img src="/2021/05/08/spring-yi-shi-wu/模拟异常.png" width="70%" height="70%">
-
-<p>这时候需要用事务解决，</p>
-<p>事务操作过程：</p>
-<p>（1）开启事务</p>
-<p>（2）进行事务操作</p>
-<p>（3）没有异常时提交事务完成</p>
-<p>（4）发生异常时，进行事务回滚。</p>
-<h5 id="5、事务操作（注解声明式事务管理）"><a href="#5、事务操作（注解声明式事务管理）" class="headerlink" title="5、事务操作（注解声明式事务管理）"></a>5、事务操作（注解声明式事务管理）</h5><p>1、在 spring 配置文件配置事务管理器   </p>
-<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token comment">&lt;!--创建事务管理器--&gt;</span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>bean</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>transactionManager<span class="token punctuation">"</span></span> 
-<span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>org.springframework.jdbc.datasource.DataSourceTransactionManager<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
- <span class="token comment">&lt;!--注入数据源--&gt;</span>
- <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>property</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>dataSource<span class="token punctuation">"</span></span> <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>dataSource<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>property</span><span class="token punctuation">&gt;</span></span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>bean</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>2、在 spring 配置文件，开启事务注解 </p>
-<p>（1）在 spring 配置文件引入名称空间 tx</p>
-<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>beans</span> <span class="token attr-name">xmlns</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.springframework.org/schema/beans<span class="token punctuation">"</span></span> 
- <span class="token attr-name"><span class="token namespace">xmlns:</span>xsi</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.w3.org/2001/XMLSchema-instance<span class="token punctuation">"</span></span> 
- <span class="token attr-name"><span class="token namespace">xmlns:</span>context</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.springframework.org/schema/context<span class="token punctuation">"</span></span> 
- <span class="token attr-name"><span class="token namespace">xmlns:</span>aop</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.springframework.org/schema/aop<span class="token punctuation">"</span></span> 
- <span class="token attr-name"><span class="token namespace">xmlns:</span>tx</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.springframework.org/schema/tx<span class="token punctuation">"</span></span> 
- <span class="token attr-name"><span class="token namespace">xsi:</span>schemaLocation</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://www.springframework.org/schema/beans 
-http://www.springframework.org/schema/beans/spring-beans.xsd 
- http://www.springframework.org/schema/context 
-http://www.springframework.org/schema/context/spring-context.xsd 
- http://www.springframework.org/schema/aop 
-http://www.springframework.org/schema/aop/spring-aop.xsd  http://www.springframework.org/schema/tx 
-http://www.springframework.org/schema/tx/spring-tx.xsd<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>（2）开启事务注解</p>
-<pre class="line-numbers language-xml" data-language="xml"><code class="language-xml"><span class="token comment">&lt;!--开启事务注解--&gt;</span>
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span><span class="token namespace">tx:</span>annotation-driven</span> <span class="token attr-name">transaction-manager</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>transactionManager<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span><span class="token namespace">tx:</span>annotation-driven</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>3、在 service 类上面（或者 service 类里面方法上面）添加事务注解 </p>
-<p>（1）@Transactional，这个注解添加到类上面，也可以添加方法上面 </p>
-<p>（2）如果把这个注解添加类上面，这个类里面所有的方法都添加事务 </p>
-<p>（3）如果把这个注解添加方法上面，为这个方法添加事务</p>
-<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Service</span>
-<span class="token annotation punctuation">@Transactional</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">UserService</span> <span class="token punctuation">{</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>这样，在发生异常后就可以将已执行的操作回滚，返回至执行前的状态。</p>
-<h3 id="事务的特性"><a href="#事务的特性" class="headerlink" title="事务的特性"></a>事务的特性</h3><ul>
-<li><strong>原子性（Atomicity）</strong>：事务是一个原子操作，由一系列动作组成。事务的原子性确保动作要么全部完成，要么完全不起作用。</li>
-<li><strong>一致性（Consistency）</strong>：一旦事务完成（不管成功还是失败），系统必须确保它所建模的业务处于一致的状态，而不会是部分完成部分失败。在现实中的数据不应该被破坏。</li>
-<li><strong>隔离性（Isolation）</strong>：可能有许多事务会同时处理相同的数据，因此每个事务都应该与其他事务隔离开来，防止数据损坏。</li>
-<li><strong>持久性（Durability）</strong>：一旦事务完成，无论发生什么系统错误，它的结果都不应该受到影响，这样就能从任何系统崩溃中恢复过来。通常情况下，事务的结果被写到持久化存储器中。</li>
-</ul>
-<h3 id="Spring事务的配置方式"><a href="#Spring事务的配置方式" class="headerlink" title="Spring事务的配置方式"></a>Spring事务的配置方式</h3><p>Spring支持编程式事务管理以及声明式事务管理两种方式。</p>
-<h4 id="1-编程式事务管理"><a href="#1-编程式事务管理" class="headerlink" title="1. 编程式事务管理"></a>1. 编程式事务管理</h4><p>编程式事务管理是侵入性事务管理，使用TransactionTemplate或者直接使用PlatformTransactionManager，对于编程式事务管理，Spring推荐使用TransactionTemplate。</p>
-<h4 id="2-声明式事务管理"><a href="#2-声明式事务管理" class="headerlink" title="2. 声明式事务管理"></a>2. 声明式事务管理</h4><p>​        声明式事务管理建立在AOP之上，其本质是对方法前后进行拦截，然后在目标方法开始之前创建或者加入一个事务，执行完目标方法之后根据执行的情况提交或者回滚。<br>​        编程式事务每次实现都要单独实现，但业务量大功能复杂时，使用编程式事务无疑是痛苦的，而声明式事务不同，声明式事务属于无侵入式，不会影响业务逻辑的实现，只需要在配置文件中做相关的事务规则声明或者通过注解的方式，便可以将事务规则应用到业务逻辑中。<br>​        显然声明式事务管理要优于编程式事务管理，这正是Spring倡导的非侵入式的编程方式。唯一不足的地方就是声明式事务管理的粒度是方法级别，而编程式事务管理是可以到代码块的，但是可以通过提取方法的方式完成声明式事务管理的配置。</p>
-<h3 id="事务的传播机制"><a href="#事务的传播机制" class="headerlink" title="事务的传播机制"></a>事务的传播机制</h3><p>​        事务的传播性一般用在事务嵌套的场景，比如一个事务方法里面调用了另外一个事务方法，那么两个方法是各自作为独立的方法提交还是内层的事务合并到外层的事务一起提交，这就是需要事务传播机制的配置来确定怎么样执行。<br>常用的事务传播机制如下：</p>
-<ul>
-<li>PROPAGATION_REQUIRED<br>Spring默认的传播机制，能满足绝大部分业务需求，如果外层有事务，则当前事务加入到外层事务，一块提交，一块回滚。如果外层没有事务，新建一个事务执行</li>
-<li>PROPAGATION_REQUES_NEW<br>该事务传播机制是每次都会新开启一个事务，同时把外层事务挂起，当当前事务执行完毕，恢复上层事务的执行。如果外层没有事务，执行当前新开启的事务即可</li>
-<li>PROPAGATION_SUPPORT<br>如果外层有事务，则加入外层事务，如果外层没有事务，则直接使用非事务方式执行。完全依赖外层的事务</li>
-<li>PROPAGATION_NOT_SUPPORT<br>该传播机制不支持事务，如果外层存在事务则挂起，执行完当前代码，则恢复外层事务，无论是否异常都不会回滚当前的代码</li>
-<li>PROPAGATION_NEVER<br>该传播机制不支持外层事务，即如果外层有事务就抛出异常</li>
-<li>PROPAGATION_MANDATORY<br>与NEVER相反，如果外层没有事务，则抛出异常</li>
-<li>PROPAGATION_NESTED<br>该传播机制的特点是可以保存状态保存点，当前事务回滚到某一个点，从而避免所有的嵌套事务都回滚，即各自回滚各自的，如果子事务没有把异常吃掉，基本还是会引起全部回滚的。</li>
-</ul>
-<h3 id="事务的隔离级别"><a href="#事务的隔离级别" class="headerlink" title="事务的隔离级别"></a>事务的隔离级别</h3><h4 id="事务并发引起的三种情况"><a href="#事务并发引起的三种情况" class="headerlink" title="事务并发引起的三种情况"></a>事务并发引起的三种情况</h4><p><strong>脏读（Dirty Reads ）</strong><br>        一个事务正在对数据进行更新操作，但是更新还未提交，另一个事务这时也来操作这组数据，并且读取了前一个事务还未提交的数据，而前一个事务如果操作失败进行了回滚，后一个事务读取的就是错误数据，这样就造成了脏读。</p>
-<p><strong>不可重复读（Non-Repeatable Reads ）</strong><br>        一个事务多次读取同一数据，在该事务还未结束时，另一个事务也对该数据进行了操作，而且在第一个事务两次次读取之间，第二个事务对数据进行了更新，那么第一个事务前后两次读取到的数据是不同的，这样就造成了不可重复读。</p>
-<p><strong>幻读（Phantom Reads ）</strong><br>第一个数据正在查询符合某一条件的数据，这时，另一个事务又插入了一条符合条件的数据，第一个事务在第二次查询符合同一条件的数据时，发现多了一条前一次查询时没有的数据，仿佛幻觉一样，这就是幻像读。</p>
-<h4 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a><strong>隔离级别</strong></h4><p><strong>DEFAULT （默认）</strong><br>这是一个PlatfromTransactionManager默认的隔离级别，使用数据库默认的事务隔离级别。另外四个与JDBC的隔离级别相对应。</p>
-<p> <strong>READ_UNCOMMITTED （读未提交）</strong><br>这是事务最低的隔离级别，它允许另外一个事务可以看到这个事务未提交的数据。这种隔离级别会产生脏读，不可重复读和幻像读。 </p>
-<p><strong>READ_COMMITTED （读已提交）</strong><br>保证一个事务修改的数据提交后才能被另外一个事务读取，另外一个事务不能读取该事务未提交的数据。这种事务隔离级别可以避免脏读出现，但是可能会出现不可重复读和幻像读。 </p>
-<p><strong>REPEATABLE_READ （可重复读）</strong><br>这种事务隔离级别可以防止脏读、不可重复读，但是可能出现幻像读。它除了保证一个事务不能读取另一个事务未提交的数据外，还保证了不可重复读。</p>
-<p><strong>SERIALIZABLE（串行化）</strong><br>这是花费最高代价但是最可靠的事务隔离级别，事务被处理为顺序执行。除了防止脏读、不可重复读外，还避免了幻像读。 </p>
-<h4 id="隔离级别解决事务并行引起的问题"><a href="#隔离级别解决事务并行引起的问题" class="headerlink" title="隔离级别解决事务并行引起的问题"></a><strong>隔离级别解决事务并行引起的问题</strong></h4><img src="/2021/05/08/spring-yi-shi-wu/事务隔离级别.png" width="70%" height="70%">
-
-<hr>
-<img src="/2021/05/08/spring-yi-shi-wu/0.jpg" width="70%" height="70%">
-
-
-
-
+<img src="/2021/09/28/springboot-zheng-he-mongodb-he-bu-fen-chang-yong-cao-zuo/4.jpg" width="70%" height="70%">
                 
             </div>
             <hr/>
@@ -607,7 +682,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd<span class="token punctua
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">LemonJelly</a>
+                    <a href="/about" rel="external nofollow noreferrer">lemonjelly</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -617,7 +692,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd<span class="token punctua
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://lemonjelly1124.github.io/2021/05/08/spring-yi-shi-wu/">http://lemonjelly1124.github.io/2021/05/08/spring-yi-shi-wu/</a>
+                    <a href="http://lemonjelly1124.github.io/2021/09/28/springboot-zheng-he-mongodb-he-bu-fen-chang-yong-cao-zuo/">http://lemonjelly1124.github.io/2021/09/28/springboot-zheng-he-mongodb-he-bu-fen-chang-yong-cao-zuo/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -630,7 +705,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd<span class="token punctua
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">LemonJelly</a>
+                    <a href="/about" target="_blank">lemonjelly</a>
                     !
                 </span>
             </div>
@@ -659,8 +734,16 @@ http://www.springframework.org/schema/tx/spring-tx.xsd<span class="token punctua
                                     <span class="chip bg-color">学习</span>
                                 </a>
                             
-                                <a href="/tags/spring/">
-                                    <span class="chip bg-color">spring</span>
+                                <a href="/tags/MongoDB/">
+                                    <span class="chip bg-color">MongoDB</span>
+                                </a>
+                            
+                                <a href="/tags/SpringBoot/">
+                                    <span class="chip bg-color">SpringBoot</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                                    <span class="chip bg-color">数据库</span>
                                 </a>
                             
                         </div>
@@ -972,41 +1055,59 @@ http://www.springframework.org/schema/tx/spring-tx.xsd<span class="token punctua
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/05/10/tupian/">
+                <a href="/2021/09/28/springboot-zheng-he-mongodb-he-bu-fen-chang-yong-cao-zuo/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="tupian">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="SpringBoot整合MongoDB和部分常用操作">
                         
-                        <span class="card-title">tupian</span>
+                        <span class="card-title">SpringBoot整合MongoDB和部分常用操作</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            今天整理了写MongoDB基础操作，写下来记录。
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-05-10
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-09-28
+                            </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            LemonJelly
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    学习
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%B5%8B%E8%AF%95/">
-                        <span class="chip bg-color">测试</span>
+                    <a href="/tags/%E5%AD%A6%E4%B9%A0/">
+                        <span class="chip bg-color">学习</span>
+                    </a>
+                    
+                    <a href="/tags/MongoDB/">
+                        <span class="chip bg-color">MongoDB</span>
+                    </a>
+                    
+                    <a href="/tags/SpringBoot/">
+                        <span class="chip bg-color">SpringBoot</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                        <span class="chip bg-color">数据库</span>
                     </a>
                     
                 </div>
@@ -1020,12 +1121,13 @@ http://www.springframework.org/schema/tx/spring-tx.xsd<span class="token punctua
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/05/06/hello-world/">
+                <a href="/2021/07/15/java-ji-he-map-he-hashmap/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="Hello World">
                         
-                        <span class="card-title">Hello World</span>
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="java集合Map和HashMap">
+                        
+                        <span class="card-title">java集合Map和HashMap</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1036,7 +1138,7 @@ http://www.springframework.org/schema/tx/spring-tx.xsd<span class="token punctua
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-06
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-15
                             </span>
                         <span class="publish-author">
                             
